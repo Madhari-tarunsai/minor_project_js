@@ -1,0 +1,691 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #000;
+  color: white;
+  overflow-x: hidden;
+}
+
+header {
+  position: fixed;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 100px;
+  z-index: 100;
+  box-shadow: 8px 4px 3px black; /* Add box-shadow */
+  background-color: aliceblue;
+}
+
+.brand {
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navigation-items a {
+  color:black;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: 0.3s;
+}
+
+.navigation-items a:hover {
+  text-decoration: underline;
+  text-decoration-color: black;
+  /* border: 3px solid black;
+  border-radius: 35px;
+  padding: 6px;
+  background-color: yellow; */
+  color: #000;
+}
+
+.home {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.video-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: 1s ease-in-out;
+}
+
+.video-slide.active {
+  opacity: 1;
+}
+
+.content {
+  position: absolute;
+  text-align: left; /* Align text to the left */
+  left: 50px; /* Move content towards the left */
+  color: white;
+  max-width: 700px;
+  opacity: 0;
+  transition: 1s;
+}
+
+.content.active {
+  opacity: 1;
+}
+
+.content h1 {
+  font-weight: 900; /* Make h1 bold */
+  font-size: xx-large;
+}
+.content p {
+  font-size: 18px; /* Increase font size of the paragraph */
+  line-height: 1.6; /* Adjust line spacing for better readability */
+}
+.content a {
+  display: inline-block;
+  padding: 10px; /* Add some padding for a better clickable area */
+  color: black;
+  text-decoration: none;
+  border: 2px solid black; /* Add white border */
+  background-color: lightblue; /* Transparent background */
+  transition: 0.3s; /* Smooth transition */
+  border-radius: 10px;
+}
+
+.media-icons {
+  position: absolute;
+  bottom: 50%;
+  right: 20px; /* Move to the right side */
+  transform: translateY(50%); /* Center vertically */
+  display: flex;
+  flex-direction: column; /* Arrange in a column */
+  gap: 10px; /* Add spacing between icons */
+}
+
+.media-icons a {
+  color: black;
+  font-size: xx-large;
+  transition: 0.3s;
+  font-weight: 700;
+}
+
+.media-icons a:hover {
+  color: #ff9800;
+}
+
+.slider-navigation {
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+}
+
+.nav-btn {
+  width: 15px;
+  height: 15px;
+  background: white;
+  margin: 0 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-btn.active {
+  background: #ff9800;
+}
+.menu-btn {
+  display: none; /* Hidden by default */
+  width: 30px;
+  height: 30px;
+  background: url("https://img.icons8.com/ios-filled/50/ffffff/menu--v1.png")
+    no-repeat center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block; /* Show in mobile view */
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Position at the top-right corner */
+    z-index: 101;
+    color: #000;
+  }
+
+  .navigation {
+    display: none; /* Hide the navigation by default */
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background-color:aliceblue; /* Dark background for the menu */
+    width: 200px;
+    padding: 20px;
+    z-index: 100;
+    
+  }
+
+  .navigation.active {
+    display: block; /* Show when active */
+  }
+
+  .navigation-items {
+    display: flex;
+    flex-direction: column; /* Stack the items vertically */
+    gap: 15px;
+    color: azure;
+  }
+}
+/* For images */
+.img-fluid {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.img-fluid:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  filter: brightness(0.9); /* Darken the image slightly */
+  box-shadow: 0px 1px 5px 8px black;
+}
+
+/* For cards */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px); /* Lifts the card when hovered */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Adds a shadow */
+}
+
+/* For the button */
+.bsb-btn-2xl {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.bsb-btn-2xl:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateX(5px); /* Slight shift to the right */
+}
+
+.bsb-btn-2xl svg {
+  transition: transform 0.3s ease;
+}
+
+.bsb-btn-2xl:hover svg {
+  transform: translateX(5px); /* Shift the arrow icon along with the button */
+}
+/* our gallery */
+.container {
+  text-align: center;
+  width: 90%;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffcc00;
+  text-transform: uppercase;
+}
+
+.gallery {
+  display: flex;
+  width: 100%;
+  height: 60vh;
+  gap: 15px;
+  margin: auto;
+  padding: 50px;
+  flex-wrap: wrap;
+  
+  
+}
+
+.card {
+  flex: 1;
+  background-size: cover;
+  background-position:center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: flex 0.5s ease-in-out, transform 0.3s;
+}
+
+.card:hover {
+  flex: 9;
+  transform: scale(1.05);
+  border: 3px solid black;
+  box-shadow: 1px 3px 3px 2px black;
+}
+.service {
+  display: flex;
+  flex-wrap: wrap; /* Enables responsiveness */
+  gap: 20px; /* Space between divs */
+  justify-content: center; /* Centers items */
+  padding: 80px;
+  background-color:#45008a; /* Dark blue background */
+}
+
+.service > div {
+  flex: 1 1 calc(25% - 20px); /* Four equal columns with spacing */
+  background:#45008a; /* Darker blue for divs */
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid black;
+  text-align: center;
+  color: white; /* Text color for better contrast */
+  box-shadow: 2px 2px 10px 4px black;
+  transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+/* Hover effect - Smooth Zoom and Shadow */
+.service > div:hover {
+  transform: scale(1.08); /* Increased zoom effect */
+  box-shadow: 4px 4px 10px 4px black; /* Stronger shadow */
+  cursor: pointer;
+}
+
+/* Responsive for tablets */
+@media (max-width: 1024px) {
+  .service > div {
+    flex: 1 1 calc(50% - 20px); /* Two items per row */
+  }
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .service > div {
+    flex: 1 1 100%; /* Full width for small screens */
+  }
+}
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f1f1f1;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.heading {
+  width: 100%;
+  text-align: center; /* Center the heading horizontally */
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* You can adjust the height to suit your layout */
+}
+
+
+.contact-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.contact-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  margin-bottom: 12px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+input[type="submit"] {
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container,
+  .contact-image {
+    flex: none;
+    width: 100%;
+    padding: 15px;
+  }
+
+  form input,
+  form textarea {
+    width: 100%;
+  }
+
+  .contact-image img {
+    width: 80%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  label {
+    font-size: 14px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  input[type="submit"] {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+}
+/* reviews */
+.customer-feedback {
+  background-color:#45008a; /* Background color for the main div */
+  padding: 40px;
+  text-align: center;
+}
+
+.feedback-header h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #f1f1f1;
+}
+
+.feedback-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.feedback-item {
+  border: 3px solid black;
+  background-color: #45008a;
+  padding: 20px;
+  width: 250px;
+  border-radius: 8px;
+  box-shadow: 2px 3px 5px 6px black;
+  text-align: center;
+  transition: transform 7s ease; /* Add transition for the zoom effect */
+}
+
+/* Apply zoom effect on hover */
+.feedback-item:hover {
+  transform: scale(1.2); /* This scales the item to 120% of its original size */
+  box-shadow: 2px 3px 5px 6px black;
+
+}
+
+
+.feedback-img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.feedback-info .customer-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #f1f1f1;
+}
+
+.feedback-info .feedback-text {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.feedback-rating .star {
+  color: #ff9800;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .feedback-container {
+    justify-content: center;
+  }
+
+  .feedback-item {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .feedback-header h1 {
+    font-size: 24px;
+  }
+
+  .feedback-item {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+/* footer */
+footer {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.footer-section {
+  flex: 1;
+  margin: 10px;
+  max-width: 250px;
+}
+
+.footer-section h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-section {
+    margin: 20px 0;
+  }
+}
+.search{
+  background-color:whitesmoke;
+  text-align: center;
+  display: inline;
+  justify-content: center;
+  flex-wrap: wrap;
+  
+}
+.search h1{
+  color:whitesmoke;
+}
+.search .search-bar input{
+  border-radius: 10px;
+}
+.search .search-bar button{
+  background-color:#87CEEB ;
+  padding: 6px;
+  border-radius: 5px;
+}
+::placeholder{
+  color: black;
+  font-size: 18px;
+  background-color:aliceblue;
+}
+.place-grid { /* Changed container class name */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.place-card { /* Changed card class name */
+  border: none;
+  padding: 20px;
+  width: 350px;
+  background-color:#D3D3D3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.place-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.place-card img { /* Changed card class name */
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.place-content { /* Changed content class name (optional) */
+  padding: 20px;
+}
+
+.place-card h2 { /* Changed card class name */
+  margin-top: 0;
+  color: #333;
+}
+
+.place-card p { /* Changed card class name */
+  margin-bottom: 10px;
+  color:black;
+  line-height: 1.6;
+}
+
+.place-card .rating { /* Changed card class name */
+  font-weight: 600;
+  color: #007bff;
+}
+
+.place-card .book-now { /* Changed card class name */
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.place-card .book-now:hover { /* Changed card class name */
+  background-color: #0056b3;
+}
+
+.data-container {
+  margin-bottom: 8px;
+}
+.place-card .like-button {
+  position:sticky; /* Position it over the image */
+  top: 10px; /* Adjust vertical position */
+  right: 10px; /* Adjust horizontal position */
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: wheat;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease; /* Smooth fade-in */
+}
+
+.place-card .like-button {
+  opacity: 1; /* Show on card hover */
+  color: white;
+}
+
+.place-card .like-button i { /* Style the icon */
+  margin-right: 5px;
+  color: red;
+
+}
+
+
