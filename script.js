@@ -86,16 +86,7 @@ fetch("https://67ab14a565ab088ea7e8930a.mockapi.io/place/place")
       cost.style.textAlign = "center";
       cost.style.fontWeight = "bold";
 
-      let button1 = document.createElement("button");
-      button1.innerHTML = "Save Card";
-      button1.style.marginLeft = "15px";
-      button1.style.border = "3px solid green";
-      button1.style.borderRadius = "5px";
-      button1.style.backgroundColor = "#45008a";
-      button1.style.color = "white";
-      button1.style.padding = "10px";
-      button1.style.cursor = "pointer";
-      button1.style.transition = "transform 0.3s, background-color 0.3s";
+      
 
       let bookButton = document.createElement("button");
       bookButton.innerHTML = "Book Now";
@@ -126,7 +117,7 @@ fetch("https://67ab14a565ab088ea7e8930a.mockapi.io/place/place")
 
       let buttonContainer = document.createElement("div");
       buttonContainer.style.textAlign = "center";
-      buttonContainer.append(bookButton, button1);
+      buttonContainer.append(bookButton);
 
       let card = document.createElement("div");
       card.append(title, image, information, rating, cost, buttonContainer);
@@ -157,8 +148,71 @@ fetch("https://67ab14a565ab088ea7e8930a.mockapi.io/place/place")
   })
   .catch((error) => console.log(error));
 
-  
+  // reviews
+ // Function to handle review submission
+document.getElementById('submit-review').addEventListener('click', function () {
+  const name = document.getElementById('customer-name').value;
+  const text = document.getElementById('feedback-text').value;
+  const rating = parseInt(document.getElementById('feedback-rating').value);
+  const imageUrl = document.getElementById('image-url').value; // Get image URL
 
+  if (name && text) {
+      const newReview = { name, text, rating, imageUrl }; // Include image URL in the review object
+      const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+      reviews.push(newReview); // Add the new review to the array
+      localStorage.setItem('reviews', JSON.stringify(reviews)); // Save to localStorage
+
+      displayReviews(); // Refresh the reviews UI
+      document.getElementById('customer-name').value = ''; // Clear input fields
+      document.getElementById('feedback-text').value = '';
+      document.getElementById('image-url').value = ''; // Clear image URL field
+  } else {
+      alert('Please enter both your name and feedback!');
+  }
+});
+
+// Function to display reviews
+function displayReviews() {
+  const feedbackContainer = document.getElementById('feedback-container');
+  feedbackContainer.innerHTML = ''; // Clear existing reviews
+
+  const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+  reviews.forEach((review, index) => {
+      const feedbackItem = document.createElement('div');
+      feedbackItem.classList.add('feedback-item');
+
+      feedbackItem.innerHTML = `
+          <div class="feedback-info">
+              <p class="customer-name">${review.name}</p>
+              <p class="feedback-text">${review.text}</p>
+          </div>
+          <div class="feedback-rating">
+              ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
+          </div>
+          ${review.imageUrl ? `<div class="feedback-image">
+              <img src="${review.imageUrl}" alt="Feedback Image" class="zoom-image"/>
+          </div>` : ''}
+          <button class="remove-button" onclick="removeReview(${index})">Remove</button>
+      `;
+
+      feedbackContainer.appendChild(feedbackItem);
+  });
+}
+
+// Function to remove a review
+function removeReview(index) {
+  const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+  reviews.splice(index, 1); // Remove the review at the specified index
+  localStorage.setItem('reviews', JSON.stringify(reviews)); // Save the updated list back to localStorage
+
+  displayReviews(); // Refresh the reviews UI
+}
+
+// Display existing reviews when the page loads
+window.onload = displayReviews;
+
+
+// searching places
 
 
 

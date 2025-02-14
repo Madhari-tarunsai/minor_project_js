@@ -73,6 +73,19 @@
       border-radius: 10px;
       margin-left: 20px;
     }
+    #btn1 {
+            padding: 12px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #btn1:hover {
+            background-color: #0056b3;
+        }
   </style>
   <body>
     <div id="div">
@@ -137,12 +150,13 @@
         /><br /><br />
 
         <button id="btn">Schedule Now</button>
+        <button id="btn1">Go_back</button>
       </form>
     </div>
 
     <script>
       let button = document.getElementById("btn");
-
+      let button1=document.getElementById("btn1")
       button.addEventListener("click", () => {
         let name = document.getElementById("name").value.trim();
         let age = document.getElementById("age").value.trim();
@@ -169,6 +183,15 @@
           }, 1500);
         }
       });
+      button1.addEventListener("click", () => {
+    alert('You want to go back');
+    let name = prompt("Enter yes/no");
+
+    if (name.toLowerCase() === "yes") {
+        window.location.href = "home.html"; 
+    }
+});
+
     </script>
   </body>
 </html>
