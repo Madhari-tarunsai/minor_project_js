@@ -250,6 +250,7 @@ h2 {
   margin: auto;
   padding: 50px;
   flex-wrap: wrap;
+  ;
   
   
 }
@@ -614,35 +615,72 @@ footer {
     margin: 20px 0;
   }
 }
-.search{
-  background-color:whitesmoke;
+.search {
+  background-color: whitesmoke;
   text-align: center;
-  display: inline;
-  justify-content: center;
-  flex-wrap: wrap;
-  
+  padding: 20px;
 }
-.search h1{
-  color:whitesmoke;
+.search h1 {
+  color: black;
 }
-.search .search-bar input{
+.search-bar input {
   border-radius: 10px;
+  padding: 8px;
+  font-size: 16px;
 }
-.search .search-bar button{
-  background-color:#87CEEB ;
-  padding: 6px;
+.search-bar button {
+  background-color: #87CEEB;
+  padding: 8px;
   border-radius: 5px;
+  cursor: pointer;
 }
-::placeholder{
+::placeholder {
   color: black;
   font-size: 18px;
-  background-color:aliceblue;
 }
-.place-grid { /* Changed container class name */
+.places-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-around;
+  align-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+.place-card {
+  border: 3px solid black;
+  width: 300px;
+  padding: 12px;
+  border-radius: 15px;
+  background-color: white;
+  transition: transform 0.4s ease-in-out, background-color 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+.place-card:hover {
+  transform: scale(1.02) translateY(-5px);
+  background-color: lightgrey;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5);
+}
+.place-img {
+  height: 250px;
+  width: 250px;
+  display: block;
+  margin: auto;
+  border-radius: 8px;
+}
+.book-btn {
+  background-color: #45008a;
+  color: white;
+  padding: 10px;
+  border: 3px solid green;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+  margin-top: 10px;
+}
+.book-btn:hover {
+  transform: scale(1.1);
+  background-color: darkgreen;
 }
 
 .place-card { /* Changed card class name */
@@ -732,3 +770,12 @@ footer {
 }
 
 
+header button{
+  background-color:green;
+  padding: 5px;
+  border: 3px solid black;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 2px 2px 8px 5px black;
+
+}

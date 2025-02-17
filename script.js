@@ -39,114 +39,75 @@ menuBtn.addEventListener("click", () => {
 // ////////////////////////////////////////
 
 
-fetch("https://67ab14a565ab088ea7e8930a.mockapi.io/place/place")
-  .then((response) => response.json())
-  .then((data) => {
-    let placeGrid = document.getElementById("placeGrid");
+async function fetchAndFilterPlaces() {
+  const searchValue = document.getElementById("search-box").value.trim().toLowerCase();
+  const placeGrid = document.getElementById("placeGrid");
+  placeGrid.innerHTML = ""; // Clear previous results
 
-    placeGrid.style.display = "flex";
-    placeGrid.style.flexWrap = "wrap";
-    placeGrid.style.justifyContent = "space-around";
-    placeGrid.style.alignContent = "center";
-    placeGrid.style.gap = "10px";
-    placeGrid.style.padding = "20px";
+  try {
+      const response = await fetch("https://67ab14a565ab088ea7e8930a.mockapi.io/place/place");
+      const data = await response.json();
 
-    document.body.style.backgroundColor = "#45008a"; // Set body background
+      // Filter places based on search input
+      const filteredPlaces = data.filter(place => 
+          place.title.toLowerCase().includes(searchValue)
+      );
 
-    data.map((place) => {
-      let title = document.createElement("h1");
-      title.style.textAlign = "center";
-      title.innerHTML = place.title;
-      title.style.fontSize="large"
+      if (filteredPlaces.length === 0) {
+          placeGrid.innerHTML = "<h2 style='color:white;'>No matching places found</h2>";
+          return;
+      }
 
-      let image = document.createElement("img");
-      image.src = place.image;
-      image.style.height = "250px";
-      image.style.width = "250px";
-      image.style.display = "block";
-      image.style.margin = "auto";
-      image.style.borderRadius = "8px";
+      filteredPlaces.forEach(place => {
+          let card = document.createElement("div");
+          card.className = "place-card";
 
-      let information = document.createElement("p");
-      information.innerText = place.information;
-      information.style.textAlign = "center";
+          let title = document.createElement("h1");
+          title.innerHTML = place.title;
+          title.style.fontSize = "large";
 
-      let rating = document.createElement("h4");
-      rating.innerHTML = `⭐⭐ ${place.rating}`;
-      rating.style.border = "1px solid black";
-      rating.style.borderRadius = "20px";
-      rating.style.padding = "5px";
-      rating.style.width = "95px";
-      rating.style.textAlign = "center";
-      rating.style.margin = "auto";
-      rating.style.fontSize="large"
+          let image = document.createElement("img");
+          image.src = place.image;
+          image.className = "place-img";
 
-      let cost = document.createElement("p");
-      cost.innerHTML = `💰 ${place.cost}`;
-      cost.style.textAlign = "center";
-      cost.style.fontWeight = "bold";
+          let information = document.createElement("p");
+          information.innerText = place.information;
 
-      
+          let rating = document.createElement("h4");
+          rating.innerHTML = `⭐⭐ ${place.rating}`;
+          rating.style.border = "1px solid black";
+          rating.style.borderRadius = "20px";
+          rating.style.padding = "5px";
+          rating.style.width = "95px";
+          rating.style.textAlign = "center";
+          rating.style.margin = "auto";
+          rating.style.fontSize = "large";
 
-      let bookButton = document.createElement("button");
-      bookButton.innerHTML = "Book Now";
-      bookButton.style.backgroundColor = "#45008a";
-      bookButton.style.color = "white";
-      bookButton.style.padding = "10px";
-      bookButton.style.marginLeft = "10px";
-      bookButton.style.border = "3px solid green";
-      bookButton.style.borderRadius = "5px";
-      bookButton.style.cursor = "pointer";
-      bookButton.style.transition = "transform 0.3s, background-color 0.3s";
-      
+          let cost = document.createElement("p");
+          cost.innerHTML = `💰 ${place.cost}`;
+          cost.style.fontWeight = "bold";
 
-      bookButton.addEventListener("click", function () {
-        alert("You are ready to book slot");
-        location.href = "book.html";
+          let bookButton = document.createElement("button");
+          bookButton.innerHTML = "Book Now";
+          bookButton.className = "book-btn";
+          bookButton.addEventListener("click", () => {
+              alert("You are ready to book a slot!");
+              location.href = "book.html";
+          });
+
+          card.append(title, image, information, rating, cost, bookButton);
+          placeGrid.appendChild(card);
+          document.body.style.backgroundColor="#45008a"
       });
 
-      bookButton.addEventListener("mouseover", function () {
-        bookButton.style.transform = "scale(1.1)";
-        bookButton.style.backgroundColor = "darkgreen";
-      });
+  } catch (error) {
+      console.error("Error fetching places:", error);
+      placeGrid.innerHTML = "<h2 style='color:white;'>Failed to load places</h2>";
+  }
+}
 
-      bookButton.addEventListener("mouseout", function () {
-        bookButton.style.transform = "scale(1)";
-        bookButton.style.backgroundColor = "#45008a";
-      });
-
-      let buttonContainer = document.createElement("div");
-      buttonContainer.style.textAlign = "center";
-      buttonContainer.append(bookButton);
-
-      let card = document.createElement("div");
-      card.append(title, image, information, rating, cost, buttonContainer);
-      card.style.border = "3px solid black";
-      card.style.height = "auto";
-      card.style.width = "300px";
-      card.style.padding = "12px";
-      card.style.borderRadius = "15px";
-      card.style.backgroundColor = "white";
-      card.style.transition = "transform 0.4s ease-in-out, background-color 0.3s";
-      card.style.boxShadow = "2px 2px 10px rgba(0,0,0,0.3)";
-      card.style.textAlign = "center";
-
-      card.addEventListener("mouseover", function () {
-        card.style.transform = "scale(1.02) translateY(-5px)";
-        card.style.backgroundColor = "lightgrey";
-        card.style.boxShadow = "4px 4px 15px rgba(0,0,0,0.5)";
-      });
-
-      card.addEventListener("mouseout", function () {
-        card.style.transform = "scale(1) translateY(0)";
-        card.style.backgroundColor = "white";
-        card.style.boxShadow = "2px 2px 10px rgba(0,0,0,0.3)";
-      });
-
-      placeGrid.appendChild(card);
-    });
-  })
-  .catch((error) => console.log(error));
+// Initial fetch when the page loads
+fetchAndFilterPlaces();
 
   // reviews
  // Function to handle review submission
@@ -214,5 +175,24 @@ window.onload = displayReviews;
 
 // searching places
 
+// logout button
+function logout() {
+  alert("Are you sure you want to log out?");
+  let userInput = prompt("If yes, please enter 'yes' or type 'no' to cancel.");
 
+  if (userInput && userInput.toLowerCase() === "yes") {
+    alert("You have been logged out successfully!");
+
+    // Show full-screen loading page
+    document.getElementById("loadingPage").style.display = "block";
+
+    // Redirect after 2 seconds
+    setTimeout(() => {
+      window.location.href = "login.html"; // Change to your actual login page
+    }, 2000);
+  } else {
+    alert("Logout canceled.");
+  }
+}
+// logout button end
 

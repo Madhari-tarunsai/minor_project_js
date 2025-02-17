@@ -149,48 +149,72 @@
           required
         /><br /><br />
 
-        <button id="btn">Schedule Now</button>
-        <button id="btn1">Go_back</button>
+        <button id="btn">Book Now</button>
+<!-- Back Button -->
+<button id="btn1">Go Back</button>
+
+<!-- Full-Screen Loading Page (Initially Hidden) -->
+<div id="loadingPage" style="
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  text-align: center;
+  font-size: 24px;
+  padding-top: 20%;
+">
+  <img src="https://cdn.dribbble.com/users/310943/screenshots/2018609/loading.gif" 
+       alt="Loading..." 
+       style="width: 80px; height: 80px; max-width: 100px;">
+  <br>Logging out, please wait...
+</div>
       </form>
     </div>
 
     <script>
-      let button = document.getElementById("btn");
-      let button1=document.getElementById("btn1")
-      button.addEventListener("click", () => {
-        let name = document.getElementById("name").value.trim();
-        let age = document.getElementById("age").value.trim();
-        let tripDate = document.getElementById("trip_date").value.trim();
-        let returnDate = document.getElementById("return_date").value.trim();
-        let gender = document.getElementById("gender").value.trim();
-        let city = document.getElementById("city").value.trim();
-        let members = document.getElementById("members").value.trim();
+        let button = document.getElementById("btn");
+  let button1 = document.getElementById("btn1");
+  let loadingPage = document.getElementById("loadingPage");
 
-        if (
-          name === "" ||
-          age === "" ||
-          tripDate === "" ||
-          returnDate === "" ||
-          gender === "" ||
-          city === "" ||
-          members === ""
-        ) {
-          alert("Please fill in all details first.");
-        } else {
-          alert("Successfully booked your slot. Now pay the amount.");
-          setTimeout(() => {
-            window.location.href = "payment.html";
-          }, 1500);
-        }
-      });
-      button1.addEventListener("click", () => {
-    alert('You want to go back');
-    let name = prompt("Enter yes/no");
+  // Function to show loading page and redirect
+  function showLoadingAndRedirect(url) {
+    loadingPage.style.display = "block"; // Show loading screen
+    setTimeout(() => {
+      window.location.href = url; // Redirect after 2 seconds
+    }, 2000);
+  }
 
-    if (name.toLowerCase() === "yes") {
-        window.location.href = "home.html"; 
+  button.addEventListener("click", () => {
+    let name = document.getElementById("name").value.trim();
+    let age = document.getElementById("age").value.trim();
+    let tripDate = document.getElementById("trip_date").value.trim();
+    let returnDate = document.getElementById("return_date").value.trim();
+    let gender = document.getElementById("gender").value.trim();
+    let city = document.getElementById("city").value.trim();
+    let members = document.getElementById("members").value.trim();
+
+    if (
+      name === "" || age === "" || tripDate === "" ||
+      returnDate === "" || gender === "" || city === "" || members === ""
+    ) {
+      alert("Please fill in all details first.");
+    } else {
+      alert("Successfully booked your slot. Now pay the amount.");
+      showLoadingAndRedirect("payment.html"); // Show loading and redirect to payment page
     }
-});
+  });
+
+  button1.addEventListener("click", () => {
+    alert("You want to go back");
+    let response = prompt("Enter yes/no");
+
+    if (response && response.toLowerCase() === "yes") {
+      showLoadingAndRedirect("home.html"); // Show loading and redirect to home page
+    }
+  });
 
     </script>
   </body>
