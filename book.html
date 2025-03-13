@@ -4,109 +4,152 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ticket_booking_slot</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        height: 100vh;
+        margin: 0;
+        position: relative;
+        background-image: url("https://gumlet.assettype.com/down-to-earth%2Fimport%2Flibrary%2Flarge%2F2023-09-20%2F0.55950800_1695195081_istock-843542714.jpg?format=auto");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+
+      #div {
+        border: 3px solid black;
+        width: 35%;
+        padding: 30px;
+        border-radius: 30px;
+        background-color: rgba(255, 223, 186, 0.6);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+      }
+
+      #div:hover {
+        background-color: rgba(255, 223, 186, 0.8);
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        transform: scale(1.1);
+      }
+
+      #btn, #btn1 {
+        padding: 12px 20px;
+        font-size: 18px;
+        color: white;
+        background-color: green;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+      }
+
+      #btn1 {
+        background-color: #007bff;
+      }
+
+      #btn:hover {
+        background-color: darkgreen;
+      }
+
+      #btn1:hover {
+        background-color: #0056b3;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        #div {
+          width: 50%; /* Adjust width for tablets */
+          padding: 20px;
+        }
+        #btn, #btn1 {
+          font-size: 16px;
+          padding: 10px 15px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #div {
+          width: 70%; /* Adjust width for smaller tablets and large phones */
+          padding: 15px;
+        }
+        h1 {
+          font-size: 20px;
+        }
+        input, select {
+          font-size: 14px;
+          padding: 8px;
+        }
+        #btn, #btn1 {
+          font-size: 14px;
+          padding: 8px 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #div {
+          width: 90%; /* Adjust width for mobile phones */
+          padding: 10px;
+        }
+        h1 {
+          font-size: 18px;
+        }
+        input, select {
+          font-size: 12px;
+          padding: 6px;
+        }
+        #btn, #btn1 {
+          font-size: 12px;
+          padding: 6px 10px;
+        }
+      }
+
+      /* Loading Page */
+      #loadingPage {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        text-align: center;
+        font-size: 24px;
+        padding-top: 20%;
+      }
+
+      #loadingPage img {
+        width: 80px;
+        height: 80px;
+        max-width: 100px;
+      }
+    </style>
   </head>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      height: 100vh; /* Ensures full viewport height */
-      margin: 0; /* Removes any default margin */
-      position: relative; /* Necessary for positioning the pseudo-element */
-      background-image: url("https://gumlet.assettype.com/down-to-earth%2Fimport%2Flibrary%2Flarge%2F2023-09-20%2F0.55950800_1695195081_istock-843542714.jpg?format=auto");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
-    /* Pseudo-element to add the opacity layer */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
-      z-index: -1; /* Ensures the overlay is below content */
-    }
-
-    #div {
-      border: 3px solid black;
-      height: auto;
-      width: 35%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      align-content: center;
-      padding: 30px;
-      border-radius: 30px;
-
-      /* Highlighting the div */
-      background-color: rgba(255, 223, 186, 0.6); /* Light yellow background */
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow around the div */
-      transform: scale(1.05); /* Slightly scale up the div for emphasis */
-      transition: all 0.3s ease; /* Smooth transition for scaling and shadow changes */
-    }
-
-    #div:hover {
-      background-color: rgba(
-        255,
-        223,
-        186,
-        0.8
-      ); /* Darken the background on hover */
-      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); /* More intense shadow on hover */
-      transform: scale(1.1); /* Increase size on hover */
-    }
-
-    #btn {
-      border: 4px solid green; /* Border for the button */
-      padding: 10px 20px; /* Add padding for better clickability */
-      text-align: center; /* Centers text inside button */
-      display: inline-flex; /* Use inline-flex if you need the button to stay inline with other elements */
-      justify-content: center; /* Centers text horizontally within button */
-      align-items: center; /* Centers text vertically within button */
-      background-color: green;
-      color: aliceblue;
-      border-radius: 10px;
-      margin-left: 20px;
-    }
-    #btn1 {
-            padding: 12px 20px;
-            font-size: 18px;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        #btn1:hover {
-            background-color: #0056b3;
-        }
-  </style>
   <body>
     <div id="div">
       <form action="javascript:void(0);">
         <h1>Reservation Slot</h1>
 
         <label for="name">Enter your name:</label>
-        <input
-          type="text"
-          id="name"
-          placeholder="Shiva Shanker"
-          required
-        /><br /><br />
+        <input type="text" id="name" placeholder="Shiva Shanker" required /><br /><br />
 
         <label for="age">Enter your age:</label>
-        <input
-          type="number"
-          id="age"
-          placeholder="eg-23"
-          required
-        /><br /><br />
+        <input type="number" id="age" placeholder="eg-23" required /><br /><br />
 
         <label for="trip_date">Trip Date:</label>
         <input type="date" id="trip_date" required /><br /><br />
@@ -119,17 +162,11 @@
           <option value="">Select</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
-          <option value="other">Other</option></select
-        ><br /><br />
+          <option value="other">Other</option>
+        </select><br /><br />
 
         <label for="city">Choose a place:</label>
-        <input
-          list="cities"
-          id="city"
-          name="city"
-          placeholder="Hyderabad"
-          required
-        />
+        <input list="cities" id="city" name="city" placeholder="Hyderabad" required />
         <datalist id="cities">
           <option value="Eiffel Tower"></option>
           <option value="Great Wall of China"></option>
@@ -138,84 +175,57 @@
           <option value="Vizag"></option>
           <option value="Colosseum, Rome"></option>
           <option value="Great Barrier Reef"></option>
-          <option value="Golconda"></option></datalist
-        ><br /><br />
+          <option value="Golconda"></option>
+        </datalist><br /><br />
 
         <label for="members">Member count:</label>
-        <input
-          type="number"
-          id="members"
-          placeholder="eg-2"
-          required
-        /><br /><br />
+        <input type="number" id="members" placeholder="eg-2" required /><br /><br />
 
         <button id="btn">Book Now</button>
-<!-- Back Button -->
-<button id="btn1">Go Back</button>
-
-<!-- Full-Screen Loading Page (Initially Hidden) -->
-<div id="loadingPage" style="
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
-  text-align: center;
-  font-size: 24px;
-  padding-top: 20%;
-">
-  <img src="https://cdn.dribbble.com/users/310943/screenshots/2018609/loading.gif" 
-       alt="Loading..." 
-       style="width: 80px; height: 80px; max-width: 100px;">
-  <br>Logging out, please wait...
-</div>
+        <button id="btn1">Go Back</button>
       </form>
     </div>
 
+    <!-- Loading Screen -->
+    <div id="loadingPage">
+      <img src="https://cdn.dribbble.com/users/310943/screenshots/2018609/loading.gif" alt="Loading..." />
+      <br>Logging out, please wait...
+    </div>
+
     <script>
-        let button = document.getElementById("btn");
-  let button1 = document.getElementById("btn1");
-  let loadingPage = document.getElementById("loadingPage");
+      let button = document.getElementById("btn");
+      let button1 = document.getElementById("btn1");
+      let loadingPage = document.getElementById("loadingPage");
 
-  // Function to show loading page and redirect
-  function showLoadingAndRedirect(url) {
-    loadingPage.style.display = "block"; // Show loading screen
-    setTimeout(() => {
-      window.location.href = url; // Redirect after 2 seconds
-    }, 2000);
-  }
+      function showLoadingAndRedirect(url) {
+        loadingPage.style.display = "block";
+        setTimeout(() => {
+          window.location.href = url;
+        }, 2000);
+      }
 
-  button.addEventListener("click", () => {
-    let name = document.getElementById("name").value.trim();
-    let age = document.getElementById("age").value.trim();
-    let tripDate = document.getElementById("trip_date").value.trim();
-    let returnDate = document.getElementById("return_date").value.trim();
-    let gender = document.getElementById("gender").value.trim();
-    let city = document.getElementById("city").value.trim();
-    let members = document.getElementById("members").value.trim();
+      button.addEventListener("click", () => {
+        let name = document.getElementById("name").value.trim();
+        let age = document.getElementById("age").value.trim();
+        let tripDate = document.getElementById("trip_date").value.trim();
+        let returnDate = document.getElementById("return_date").value.trim();
+        let gender = document.getElementById("gender").value.trim();
+        let city = document.getElementById("city").value.trim();
+        let members = document.getElementById("members").value.trim();
 
-    if (
-      name === "" || age === "" || tripDate === "" ||
-      returnDate === "" || gender === "" || city === "" || members === ""
-    ) {
-      alert("Please fill in all details first.");
-    } else {
-      alert("Successfully booked your slot. Now pay the amount.");
-      showLoadingAndRedirect("payment.html"); // Show loading and redirect to payment page
-    }
-  });
+        if (!name || !age || !tripDate || !returnDate || !gender || !city || !members) {
+          alert("Please fill in all details first.");
+        } else {
+          alert("Successfully booked your slot. Now pay the amount.");
+          showLoadingAndRedirect("payment.html");
+        }
+      });
 
-  button1.addEventListener("click", () => {
-    alert("You want to go back");
-    let response = prompt("Enter yes/no");
-
-    if (response && response.toLowerCase() === "yes") {
-      showLoadingAndRedirect("home.html"); // Show loading and redirect to home page
-    }
-  });
-
+      button1.addEventListener("click", () => {
+        if (confirm("Do you want to go back?")) {
+          showLoadingAndRedirect("home.html");
+        }
+      });
     </script>
   </body>
 </html>
